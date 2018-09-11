@@ -24,27 +24,24 @@ class Rover
       if num == "M"
         move
       elsif num == "R" || num == "L"
-        turn
+        turn(num)
       end
     end
   end
 
   def move
-    message.each do |num|
-      if num == "M" && @direction == "N"
+      if @direction == "N"
         @y_coordinate = @y_coordinate + 1
-      elsif num == "M" && @direction == "S"
+      elsif @direction == "S"
         @y_coordinate = @y_coordinate - 1
-      elsif num == "M" && @direction == "E"
+      elsif @direction == "E"
         @x_coordinate = @x_coordinate + 1
-      elsif num == "M" && @direction == "E"
+      elsif @direction == "E"
         @y_coordinate = @y_coordinate - 1
       end
-    end
   end
 
-  def turn
-    message.each do |num|
+  def turn(num)
       if num == "R" && @direction == "N"
         @direction = "E"
       elsif num == "R" && @direction == "E"
@@ -62,17 +59,17 @@ class Rover
       elsif num == "L" && @direction == "E"
         @direction = "N"
       end
-    end
   end
-
-  puts "What should we do ?"
-  message = gets.chomp.split("")
-  rover1 = Rover.new
-  rover1.read_instruction
-
 end
+rover1 = Rover.new
+message = ""
+until message == "stop"
+puts "What should we do ?"
+message = gets.chomp.split("")
+#puts message
+rover1.read_instruction(message)
 
-# puts "What should we do ?"
-# message = gets.chomp.split("")
-# rover1 = Rover.new
-# rover1.read_instruction
+puts rover1.x_coordinate
+puts rover1.y_coordinate
+puts rover1.direction
+end
