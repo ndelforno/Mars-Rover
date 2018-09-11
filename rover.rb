@@ -1,7 +1,7 @@
 class Rover
   def initialize
-    @x_coordinate = 1
-    @y_coordinate = 2
+    @x_coordinate = 0
+    @y_coordinate = 0
     @direction = "N"
   end
 
@@ -21,9 +21,10 @@ class Rover
   # Attribute Writers
   def read_instruction(message)
     message.each do |num|
+      puts num
       if num == "M"
         move
-      elsif num == "R" || num == "L"
+      else
         turn(num)
       end
     end
@@ -36,8 +37,8 @@ class Rover
         @y_coordinate = @y_coordinate - 1
       elsif @direction == "E"
         @x_coordinate = @x_coordinate + 1
-      elsif @direction == "E"
-        @y_coordinate = @y_coordinate - 1
+      elsif @direction == "W"
+        @x_coordinate = @x_coordinate - 1
       end
   end
 
@@ -47,12 +48,12 @@ class Rover
       elsif num == "R" && @direction == "E"
         @direction = "S"
       elsif num == "R" && @direction == "S"
-        @direction = "O"
-      elsif num == "R" && @direction == "O"
+        @direction = "W"
+      elsif num == "R" && @direction == "W"
         @direction = "N"
       elsif num == "L" && @direction == "N"
-        @direction = "O"
-      elsif num == "L" && @direction == "O"
+        @direction = "W"
+      elsif num == "L" && @direction == "W"
         @direction = "S"
       elsif num == "L" && @direction == "S"
         @direction = "E"
